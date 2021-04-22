@@ -45,36 +45,29 @@
     </div>
     </el-header>
      <!--活动框-->
-        <div class="block">
-          <el-carousel height="300px">
-            <el-carousel-item v-for="item in 4" :key="item">
-              <h3 class="small">{{ item }}</h3>
+        <div class="block" style="width: 900px;height: 500px;margin-left: 200px;margin-top: 10px">
+          <el-carousel height="500px">
+            <el-carousel-item v-for="item in o" :key="item">
+              <img style="height: 500px;width:900px" :src="item.url" alt="无图片"/>
             </el-carousel-item>
           </el-carousel>
         </div>
-
-    <div style="background-color: white">
-    <!--    卡片显示-->
-    <el-row>
-      <el-col :span="8" v-for="(o, index) in 1" :key="o" :offset="index > 0 ? 1 : 0">
-        <el-card :body-style="{ padding: '12px' }">
-          <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
-          <div style="padding: 14px;">
-            <span>好吃的汉堡</span>
-            <div class="bottom clearfix">
-              <el-button type="text" class="button">操作按钮</el-button>
-            </div>
-          </div>
-        </el-card>
-      </el-col>
-    </el-row>
-    </div>
   </el-container>
 </template>
 
 <script>
   export default {
     name: 'Main',
+    data() {
+      return {
+        o: [
+          { url: require('@/assets/1.jpg') },
+          { url: require('@/assets/2.jpg') },
+          { url: require('@/assets/3.jpg') },
+          { url: require('@/assets/4.jpg') }
+        ]
+      }
+    },
     methods: {
       GotoUser() {
         this.$router.push({path: '/User'})

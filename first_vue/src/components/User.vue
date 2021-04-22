@@ -76,7 +76,7 @@
 <!--    ===========中间记录===============-->
       <el-main>
         <h3>每日记录：</h3>
-        <el-collapse v-for="(o, index) in 6" :key="o" v-model="activeNames" @change="handleChange" style="width: 800px;margin-left: 100px">
+        <el-collapse v-for="o in 6" :key="o" v-model="activeNames" @change="handleChange" style="width: 800px;margin-left: 100px">
           <el-collapse-item title="--2021年1月20日" name="1">
             <div style="margin-left: 20px">早餐：{{text1}}</div>
             <div style="margin-left: 20px">午餐：{{text2}}</div>
