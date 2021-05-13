@@ -54,7 +54,30 @@
         this.$refs[ruleForm].validate((valid) => {
           if (valid) {
            // this.$message('登录成功！')
-            this.$router.push('/main')
+            this.$axios({
+              methods: 'get',
+              url: '/api/login/',
+              params: {
+                username: this.loginForm.username,
+                password: this.loginForm.password
+              }
+            })
+              .then(res => {
+                // 执行成功
+                // console.log(res.data.result)
+                console.log('loginform:', this.loginForm.username)
+                localStorage.setItem('username', this.loginForm.username)
+                if (res.data === 1) {
+                  this.$router.push('/main')
+                } else {
+                  this.$message('查无此人,请重新输入')
+                }
+              })
+              .catch(err => {
+                // 执行失败
+                this.$message('登录失败，请检查后端接口', err)
+              })
+            // this.$router.push('/main')
           } else {
             console.log('error submit!!')
             this.$message('登录失败！')

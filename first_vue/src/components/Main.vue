@@ -7,7 +7,7 @@
     </div>
     <div class="right_box">
       <el-menu
-        :default-active="activeIndex2"
+        :default-active="$router.path"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -18,12 +18,12 @@
         <el-menu-item index="/main">首页</el-menu-item>
         <el-submenu index="/search">
           <template slot="title" >食物</template>
-          <el-menu-item index="/search">蔬菜</el-menu-item>
-          <el-menu-item index="/search">肉类</el-menu-item>
-          <el-menu-item index="/search">水果</el-menu-item>
-          <el-menu-item index="/search">主食</el-menu-item>
-          <el-menu-item index="/search">坚果</el-menu-item>
-          <el-menu-item index="/search">饮品</el-menu-item>
+          <el-menu-item index="/search?type=1">蔬菜</el-menu-item>
+          <el-menu-item index="/search?type=2">肉类</el-menu-item>
+          <el-menu-item index="/search?type=3">水果</el-menu-item>
+          <el-menu-item index="/search?type=4">主食</el-menu-item>
+          <el-menu-item index="/search?type=5">坚果</el-menu-item>
+          <el-menu-item index="/search?type=6">饮品</el-menu-item>
           <el-menu-item index="/search">其他</el-menu-item>
         </el-submenu>
         <el-submenu index="/sport">

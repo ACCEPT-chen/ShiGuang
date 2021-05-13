@@ -7,7 +7,9 @@ import Make from '../components/Make'
 import User from '../components/User'
 import add from '../components/add'
 import sport from '../components/sport'
-
+import axios from 'axios'
+Vue.use(axios)
+Vue.prototype.$axios = axios
 Vue.use(Router)
 
 export default new Router({
@@ -20,12 +22,18 @@ export default new Router({
     {
       path: '/main',
       name: 'Main',
-      component: Main
+      component: Main,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/search',
       name: 'search',
-      component: search
+      component: search,
+      meta: {
+        keepAlive: true
+      }
     },
     {
       path: '/make',
@@ -45,7 +53,10 @@ export default new Router({
     {
       path: '/sport',
       name: 'sport',
-      component: sport
+      component: sport,
+      meta: {
+        keepAlive: true
+      }
     }
   ]
 })
