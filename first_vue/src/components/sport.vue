@@ -7,7 +7,7 @@
       </div>
       <div class="right_box">
         <el-menu
-          :default-active="this.$route.path"
+          :default-active="$route.path"
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
@@ -18,20 +18,27 @@
           <el-menu-item index="/main">首页</el-menu-item>
           <el-submenu index="/search">
             <template slot="title" >食物</template>
-            <el-menu-item index="/search">蔬菜</el-menu-item>
-            <el-menu-item index="/search">肉类</el-menu-item>
-            <el-menu-item index="/search">水果</el-menu-item>
-            <el-menu-item index="/search">主食</el-menu-item>
-            <el-menu-item index="/search">坚果</el-menu-item>
-            <el-menu-item index="/search">饮品</el-menu-item>
-            <el-menu-item index="/search">其他</el-menu-item>
+            <el-menu-item index="/search?type=1">主食</el-menu-item>
+            <el-menu-item index="/search?type=2">肉、蛋类</el-menu-item>
+            <el-menu-item index="/search?type=3">奶类</el-menu-item>
+            <el-menu-item index="/search?type=4">蔬果</el-menu-item>
+            <el-menu-item index="/search?type=5">饮料</el-menu-item>
+            <el-menu-item index="/search?type=6">豆制品</el-menu-item>
+            <el-menu-item index="/search?type=7">油脂类</el-menu-item>
+            <el-menu-item index="/search?type=8">调味品</el-menu-item>
+            <el-menu-item index="/search?type=9">零食点心</el-menu-item>
+            <el-menu-item index="/search?type=10">菜肴</el-menu-item>
           </el-submenu>
           <el-submenu index="/sport">
             <template slot="title" >运动</template>
-            <el-menu-item index="/sport">上肢</el-menu-item>
-            <el-menu-item index="/sport">下肢</el-menu-item>
-            <el-menu-item index="/sport">腹部</el-menu-item>
-            <el-menu-item index="/sport">全身</el-menu-item>
+            <el-menu-item index="/sport?type=1">走路</el-menu-item>
+            <el-menu-item index="/sport?type=2">跑步</el-menu-item>
+            <el-menu-item index="/sport?type=3">体操舞蹈</el-menu-item>
+            <el-menu-item index="/sport?type=4">瑜伽</el-menu-item>
+            <el-menu-item index="/sport?type=5">自行车</el-menu-item>
+            <el-menu-item index="/sport?type=6">球类</el-menu-item>
+            <el-menu-item index="/sport?type=7">日常</el-menu-item>
+            <el-menu-item index="/sport?type=8">其他</el-menu-item>
           </el-submenu>
           <el-menu-item index="/make">制作菜单</el-menu-item>
           <el-dropdown>
@@ -49,7 +56,7 @@
       <!--      侧边栏-->
       <el-aside width="180px">
         <el-menu
-          default-active="2"
+          :default-active="$route.path"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -58,45 +65,77 @@
           active-text-color="#ffd04b"
           :collapse=this.isCollapsed
           :collapse-transition="false"
-          :unique-opened="true">
-          <el-menu-item index="2">
-            <i class="el-icon-bicycle"></i>
-            <span slot="title">上肢</span>
+          :unique-opened="true"
+          router="true">
+          <el-menu-item index="/search?type=1">
+            <i class="el-icon-food"></i>
+            <span slot="title">主食</span>
           </el-menu-item>
-          <el-menu-item index="3">
+          <el-menu-item index="/sport?type=1">
             <i class="el-icon-bicycle"></i>
-            <span slot="title">下肢</span>
+            <span slot="title">走路</span>
           </el-menu-item>
-          <el-menu-item index="4">
+          <el-menu-item index="/sport?type=2">
             <i class="el-icon-bicycle"></i>
-            <span slot="title">腹部</span>
+            <span slot="title">跑步</span>
           </el-menu-item>
-          <el-menu-item index="5">
+          <el-menu-item index="/sport?type=3">
             <i class="el-icon-bicycle"></i>
-            <span slot="title">全身</span>
+            <span slot="title">体操舞蹈</span>
+          </el-menu-item>
+          <el-menu-item index="/sport?type=4">
+            <i class="el-icon-bicycle"></i>
+            <span slot="title">瑜伽</span>
+          </el-menu-item>
+          <el-menu-item index="/sport?type=5">
+            <i class="el-icon-bicycle"></i>
+            <span slot="title">自行车</span>
+          </el-menu-item>
+          <el-menu-item index="/sport?type=6">
+            <i class="el-icon-bicycle"></i>
+            <span slot="title">球类</span>
+          </el-menu-item>
+          <el-menu-item index="/sport?type=7">
+            <i class="el-icon-bicycle"></i>
+            <span slot="title">日常</span>
+          </el-menu-item>
+          <el-menu-item index="/sport?type=8">
+            <i class="el-icon-bicycle"></i>
+            <span slot="title">其他</span>
           </el-menu-item>
         </el-menu>
       </el-aside>
       <!--      ======正文中心========-->
       <el-main>
+        <template>
+          <el-input v-model="input" placeholder="请输入内容" @keydown.native="InputFind($event)"></el-input>
+        </template>
         <div>
           <el-row>
-            <el-col :span="8" v-for="(o, index) in 6" :key="o" :offset="index > 0 ? 3 : 3">
+            <el-col :span="8" v-for="(item, index) in list" :key="item.id" :offset="index > 0 ? 3 : 3">
               <el-card :body-style="{ padding: '10px' }" style="margin-top: 10px">
                 <div slot="header" class="clearfix">
-                  <span>运动名称</span>
+                  <span>{{item.sportname}}</span>
                 </div>
                 <div class="avatar_box" >
-                  <img src="../assets/logo.jpg" style="height: 130px;width: 130px;border-radius: 50%;margin-left: 20px">
+                  <img src="../assets/logo.jpg"  style="height: 130px;width: 130px;border-radius: 50%;margin-left: 20px">
                 </div>
                 <hr>
-                <div v-for="o in 2" :key="o" class="text_1">
-                  {{'运动详情 ' + o }}
-                </div>
+                消耗热量 {{item.sportcalorie}}
               </el-card>
             </el-col>
           </el-row>
         </div>
+        <el-pagination
+          background
+          :page-size="size"
+          :page-sizes = "[10, 50, 100]"
+          layout="prev, pager, next, sizes"
+          :total="total"
+          @current-change ="currentChangeHandle"
+          @size-change ="sizeChangeHandle"
+          style="margin-top: 25px">
+        </el-pagination>
       </el-main>
     </el-container>
   </el-container>
@@ -107,8 +146,18 @@
     name: 'sport',
     data() {
       return {
-        isCollapsed: false
+        isCollapsed: false,
+        type: 0,
+        input: '',
+        size: 10,
+        currentPage: 1,
+        total: 0,
+        list: []
       }
+    },
+    activated() {
+      console.log('钩子函数')
+      this.getInfo()
     },
     methods: {
       GotoUser() {
@@ -116,6 +165,85 @@
       },
       loginout() {
         this.$router.push({path: '/'})
+      },
+      // 查询信息
+      async getInfo() {
+        console.log('this.$route.query.type', this.$route.query.type)
+        this.type = this.$route.query.type
+        if (this.type !== 0 && this.input === '') {
+          console.log('执行gosearch')
+          this.goSearch()
+        } else { this.goFind() }
+      },
+      goSearch() {
+        this.$axios({
+          methods: 'get',
+          url: '/api/sportByPage/',
+          params: {
+            type: this.type,
+            pageSize: this.size,
+            pageIndex: this.currentPage
+          }
+        })
+          .then(res => {
+            console.log('检查所传参数', this.type)
+            console.log(res.data.data)
+            console.log('返回数据')
+            this.list = res.data.data
+            this.total = res.data.total
+          })
+          .catch(err => {
+            // 执行失败
+            this.$message('搜索失败，请检查后端接口', err)
+          })
+      },
+      InputFind(e) {
+        var keyCode = e.keyCode || e.which || e.charCode
+        if (keyCode === 13) {
+          // 按下回车键执行内容
+          console.log('查找')
+          this.goFind()
+        }
+      },
+      goFind() {
+        this.$axios({
+          methods: 'get',
+          url: '/api/findSportByInput/',
+          params: {
+            sportname: this.input,
+            pageSize: this.size,
+            pageIndex: this.currentPage
+          }
+        })
+          .then(res => {
+            console.log(res.data.data)
+            console.log('返回数据')
+            this.list = res.data.data
+            this.total = res.data.total
+          })
+          .catch(err => {
+            // 执行失败
+            this.$message('搜索失败，请检查后端接口', err)
+          })
+      },
+      // 每页显示的条数改变
+      sizeChangeHandle(val) {
+        this.size = val
+        // 改变每页显示的条数
+        this.currentPage = 1
+        // 注意：在改变每页显示的条数时，要将页码显示到第一页
+        this.getInfo()
+        // 点击每页显示的条数时，显示第一页
+        console.log(`每页 ${val} 条`)
+      },
+      // current-change用于监听页数改变，而内容也发生改变
+      currentChangeHandle(val) {
+        this.currentPage = val
+        this.getInfo()
+        console.log(`当前页: ${val}`)
+      },
+      handleSelect(item) {
+        console.log(item)
       }
     }
   }

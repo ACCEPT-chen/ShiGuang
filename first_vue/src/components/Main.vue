@@ -28,10 +28,14 @@
         </el-submenu>
         <el-submenu index="/sport">
           <template slot="title" >运动</template>
-          <el-menu-item index="/sport">上肢</el-menu-item>
-          <el-menu-item index="/sport">下肢</el-menu-item>
-          <el-menu-item index="/sport">腹部</el-menu-item>
-          <el-menu-item index="/sport">全身</el-menu-item>
+          <el-menu-item index="/sport?type=1">走路</el-menu-item>
+          <el-menu-item index="/sport?type=2">跑步</el-menu-item>
+          <el-menu-item index="/sport?type=3">体操舞蹈</el-menu-item>
+          <el-menu-item index="/sport?type=4">瑜伽</el-menu-item>
+          <el-menu-item index="/sport?type=5">自行车</el-menu-item>
+          <el-menu-item index="/sport?type=6">球类</el-menu-item>
+          <el-menu-item index="/sport?type=7">日常</el-menu-item>
+          <el-menu-item index="/sport?type=8">其他</el-menu-item>
         </el-submenu>
         <el-menu-item index="make">制作菜单</el-menu-item>
         <el-dropdown>

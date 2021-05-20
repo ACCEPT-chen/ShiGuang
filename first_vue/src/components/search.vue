@@ -31,10 +31,14 @@
           </el-submenu>
           <el-submenu index="/sport">
             <template slot="title" >运动</template>
-            <el-menu-item index="/sport">上肢</el-menu-item>
-            <el-menu-item index="/sport">下肢</el-menu-item>
-            <el-menu-item index="/sport">腹部</el-menu-item>
-            <el-menu-item index="/sport">全身</el-menu-item>
+            <el-menu-item index="/sport?type=1">走路</el-menu-item>
+            <el-menu-item index="/sport?type=2">跑步</el-menu-item>
+            <el-menu-item index="/sport?type=3">体操舞蹈</el-menu-item>
+            <el-menu-item index="/sport?type=4">瑜伽</el-menu-item>
+            <el-menu-item index="/sport?type=5">自行车</el-menu-item>
+            <el-menu-item index="/sport?type=6">球类</el-menu-item>
+            <el-menu-item index="/sport?type=7">日常</el-menu-item>
+            <el-menu-item index="/sport?type=8">其他</el-menu-item>
           </el-submenu>
           <el-menu-item index="/make">制作菜单</el-menu-item>
           <el-dropdown>
@@ -63,10 +67,6 @@
         :collapse-transition="false"
         :unique-opened="true"
         router="true">
-          <el-menu-item index="/search?type=1">
-            <i class="el-icon-food"></i>
-            <span slot="title">主食</span>
-          </el-menu-item>
           <el-menu-item index="/search?type=2">
             <i class="el-icon-food"></i>
             <span slot="title">肉、蛋</span>
@@ -125,7 +125,7 @@
                 <span>{{item.foodname}}</span>
               </div>
               <div class="avatar_box" >
-                <img src="../assets/logo.jpg" @click="getFood" style="height: 130px;width: 130px;border-radius: 50%;margin-left: 20px">
+                <img src="../assets/logo.jpg"  style="height: 130px;width: 130px;border-radius: 50%;margin-left: 20px">
               </div>
               <hr>
 <!--              <div v-for="o in 2" :key="o" class="text_1">-->
@@ -167,7 +167,6 @@
     data() {
       return {
         isCollapsed: false,
-        foodid: 2,
         size: 10,
         currentPage: 1,
         total: 0,
